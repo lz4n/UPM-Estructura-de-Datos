@@ -24,9 +24,7 @@ public class Ej3 {
         while (iterator.hasNext() && ordenados) {
             int elemento = iterator.next();
 
-            if (anterior > elemento) {
-                ordenados = false;
-            }
+            ordenados = anterior <= elemento;
 
             anterior = elemento;
         }
