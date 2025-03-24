@@ -1,11 +1,14 @@
-package T3.ejercicosListas;
+package T3;
 
-import java.util.Arrays;
-
-public class Ej7Extra {
+public class Ej3Extra {
     public static void main(String[] args) {
-        Lista lista = new Lista(new int[]{1, 2, 3});
+        Lista lista = new Lista();
+        lista.insertar(1);
+        lista.insertar(2);
+        lista.insertar(7);
 
+        System.out.println(lista);
+        lista.imagenEspecular();
         System.out.println(lista);
     }
 
@@ -17,29 +20,6 @@ public class Ej7Extra {
             inicio = null;
             fin = null;
             numElementos = 0;
-        }
-
-        public Lista(int[] datos) {
-            this();
-
-            if (datos == null || datos.length == 0) {
-                return;
-            }
-
-            Nodo anterior = new Nodo(datos[0], null);
-            inicio = anterior;
-
-            Nodo nuveoNodo;
-            for (int i = 1; i < datos.length; i++) {
-                nuveoNodo = new Nodo(datos[i], null);
-
-                anterior.setSiguiente(nuveoNodo);
-                anterior = nuveoNodo;
-            }
-
-            fin = anterior;
-
-            numElementos = datos.length;
         }
 
         public boolean vacia() {
@@ -71,6 +51,25 @@ public class Ej7Extra {
                 resultado += "]";
             }
             return resultado;
+        }
+
+        public void imagenEspecular() {
+            if (vacia()) {
+                return;
+            }
+
+            Nodo actual = inicio, nuevoNodo = inicio;
+
+            int elemento;
+            while (actual != null) {
+                elemento = actual.getDato();
+
+                nuevoNodo = new Nodo(elemento, nuevoNodo);
+
+                actual = actual.getSiguiente();
+            }
+
+            inicio = nuevoNodo;
         }
     }
 

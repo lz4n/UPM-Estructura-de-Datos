@@ -1,4 +1,4 @@
-package T3.ejercicosListas;
+package T3;
 
 import java.util.Arrays;
 import java.util.Iterator;

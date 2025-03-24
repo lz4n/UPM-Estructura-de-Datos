@@ -1,11 +1,11 @@
-package T3.ejercicosListas;
+package T3;
 
-public class Ej10Extra {
+public class Ej9Extra {
     public static void main(String[] args) {
         Lista lista = new Lista(new int[]{1, 2, 4, 2, 3, 2});
 
         System.out.println(lista);
-        System.out.println(lista.contiene(2));
+        lista.borrarDuplicar(2);
         System.out.println(lista);
     }
 
@@ -73,29 +73,36 @@ public class Ej10Extra {
             return resultado;
         }
 
-        public boolean contiene(int dato) {
+        public void borrarDuplicar(int dato) {
             Nodo anterior = null, actual = inicio, siguiente;
 
-            boolean encontrado = false;
-            while (actual != null && !encontrado) {
+            boolean primeraAparicion = true;
+            while (actual != null) {
                 int valorActual = actual.getDato();
                 siguiente = actual.getSiguiente();
 
                 if (valorActual == dato) {
-                    if (anterior != null) {
-                        anterior.setSiguiente(actual.getSiguiente());
-                        actual.setSiguiente(inicio);
-                        inicio = actual;
+                    if (primeraAparicion) {
+                        if (anterior == null) {
+                            inicio = actual.getSiguiente();
+                        } else {
+                            anterior.setSiguiente(actual.getSiguiente());
+                        }
+
+                        numElementos--;
+                    } else {
+                        Nodo nuevoNodo = new Nodo(valorActual, siguiente);
+                        actual.setSiguiente(nuevoNodo);
+
+                        numElementos++;
                     }
 
-                    encontrado = true;
+                    primeraAparicion = false;
                 }
 
                 anterior = actual;
                 actual = siguiente;
             }
-
-            return encontrado;
         }
     }
 

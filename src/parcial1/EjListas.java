@@ -1,14 +1,21 @@
-package T3.ejercicosListas;
+package parcial1;
 
-public class Ej2Extra {
+import T3.Ej2Extra;
+
+import java.util.ArrayDeque;
+import java.util.Stack;
+
+public class EjListas {
     public static void main(String[] args) {
         Lista lista = new Lista();
-        lista.insertar(1);
-        lista.insertar(2);
+
         lista.insertar(7);
+        lista.insertar(8);
+        lista.insertar(10);
+        lista.insertar(12);
 
         System.out.println(lista);
-        lista.triplicar();
+        lista.insertarExamen(10);
         System.out.println(lista);
     }
 
@@ -19,18 +26,14 @@ public class Ej2Extra {
         public Lista() {
             inicio = null;
             fin = null;
-            numElementos = 0;
         }
 
-        public boolean vacia() {
-            return inicio == null;
-        }
-
+        /* SOLO PARA TESTING */
         public void insertar(int dato) {
 
             Nodo nuevo = new Nodo(dato, null);
 
-            if (this.vacia()) {
+            if (inicio == null) {
                 inicio = nuevo;
             } else {
                 fin.setSiguiente(nuevo);
@@ -39,10 +42,45 @@ public class Ej2Extra {
             numElementos++;
         }
 
+        public void insertarExamen(int valor) {
+            if (inicio == null) {
+                insertarExamenVacio();
+            } else {
+                insertarExamenNoVacio(valor);
+            }
+        }
+
+        private void insertarExamenVacio() {
+            inicio = new Nodo(0, null);
+            fin = inicio;
+        }
+
+        private void insertarExamenNoVacio(int valor) {
+            Nodo actual = inicio;
+            boolean insertado = false;
+
+            while (actual != null && !insertado) {
+                int dato = actual.getDato();
+                if (dato == valor && actual != fin) {
+                    Nodo nuevo = new Nodo(dato, actual.getSiguiente());
+                    actual.setSiguiente(nuevo);
+
+                    insertado = true;
+                }
+                actual = actual.getSiguiente();
+            }
+
+            if (!insertado) {
+                Nodo nuevo = new Nodo(valor, null);
+                fin.setSiguiente(nuevo);
+                fin = nuevo;
+            }
+        }
+
         @Override
         public String toString() {
             String resultado = "[";
-            if (!this.vacia()) {
+            if (inicio != null) {
                 Nodo actual = inicio;
                 while (actual != null) {
                     resultado += "," + actual.getDato();
@@ -51,27 +89,6 @@ public class Ej2Extra {
                 resultado += "]";
             }
             return resultado;
-        }
-
-        public void triplicar() {
-            if (vacia()) {
-                return;
-            }
-
-            Nodo actual = inicio, nuevoNodo, siguiente;
-
-            int elemento;
-            while (actual != null) {
-                elemento = actual.getDato();
-
-                nuevoNodo = new Nodo(elemento, actual.getSiguiente());
-                nuevoNodo = new Nodo(elemento, nuevoNodo);
-
-                siguiente = actual.getSiguiente();
-                actual.setSiguiente(nuevoNodo);
-
-                actual = siguiente;
-            }
         }
     }
 

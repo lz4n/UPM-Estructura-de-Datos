@@ -1,11 +1,11 @@
-package T3.ejercicosListas;
+package T3;
 
-public class Ej11Extra {
+public class Ej8Extra {
     public static void main(String[] args) {
-        Lista lista = new Lista(new int[]{1, 2});
+        Lista lista = new Lista(new int[]{1, 2, 2});
 
         System.out.println(lista);
-        lista.encolar(1);
+        lista.insertarAContinuacion(2, 2);
         System.out.println(lista);
     }
 
@@ -73,26 +73,21 @@ public class Ej11Extra {
             return resultado;
         }
 
-        public void encolar(int prioridad) {
-            Nodo actual = inicio, anterior = null, siguiete;
+        public void insertarAContinuacion(int base, int nuevo) {
+            Nodo actual = inicio, siguiente;
 
-            boolean introducido = false;
-            while (actual != null && !introducido) {
-                siguiete = actual.getSiguiente();
+            while (actual != null) {
+                int valorActual = actual.getDato();
+                siguiente = actual.getSiguiente();
 
-                if (actual.getDato() > prioridad || siguiete == null) {
-                    if (anterior == null) {
-                        inicio = new Nodo(prioridad, actual);
-                    } else {
-                        Nodo nuevo = new Nodo(prioridad, actual);
-                        anterior.setSiguiente(nuevo);
-                    }
+                if (valorActual == base) {
+                    Nodo nuevoNodo = new Nodo(nuevo, siguiente);
+                    actual.setSiguiente(nuevoNodo);
 
-                    introducido = true;
+                    numElementos++;
                 }
 
-                actual = actual.getSiguiente();
-                anterior = actual;
+                actual = siguiente;
             }
         }
     }

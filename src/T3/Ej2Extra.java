@@ -1,6 +1,6 @@
-package T3.ejercicosListas;
+package T3;
 
-public class Ej3Extra {
+public class Ej2Extra {
     public static void main(String[] args) {
         Lista lista = new Lista();
         lista.insertar(1);
@@ -8,7 +8,7 @@ public class Ej3Extra {
         lista.insertar(7);
 
         System.out.println(lista);
-        lista.imagenEspecular();
+        lista.triplicar();
         System.out.println(lista);
     }
 
@@ -53,23 +53,25 @@ public class Ej3Extra {
             return resultado;
         }
 
-        public void imagenEspecular() {
+        public void triplicar() {
             if (vacia()) {
                 return;
             }
 
-            Nodo actual = inicio, nuevoNodo = inicio;
+            Nodo actual = inicio, nuevoNodo, siguiente;
 
             int elemento;
             while (actual != null) {
                 elemento = actual.getDato();
 
+                nuevoNodo = new Nodo(elemento, actual.getSiguiente());
                 nuevoNodo = new Nodo(elemento, nuevoNodo);
 
-                actual = actual.getSiguiente();
-            }
+                siguiente = actual.getSiguiente();
+                actual.setSiguiente(nuevoNodo);
 
-            inicio = nuevoNodo;
+                actual = siguiente;
+            }
         }
     }
 

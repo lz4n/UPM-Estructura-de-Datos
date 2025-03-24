@@ -1,11 +1,11 @@
-package T3.ejercicosListas;
+package T3;
 
-public class Ej9Extra {
+import java.util.Arrays;
+
+public class Ej7Extra {
     public static void main(String[] args) {
-        Lista lista = new Lista(new int[]{1, 2, 4, 2, 3, 2});
+        Lista lista = new Lista(new int[]{1, 2, 3});
 
-        System.out.println(lista);
-        lista.borrarDuplicar(2);
         System.out.println(lista);
     }
 
@@ -71,38 +71,6 @@ public class Ej9Extra {
                 resultado += "]";
             }
             return resultado;
-        }
-
-        public void borrarDuplicar(int dato) {
-            Nodo anterior = null, actual = inicio, siguiente;
-
-            boolean primeraAparicion = true;
-            while (actual != null) {
-                int valorActual = actual.getDato();
-                siguiente = actual.getSiguiente();
-
-                if (valorActual == dato) {
-                    if (primeraAparicion) {
-                        if (anterior == null) {
-                            inicio = actual.getSiguiente();
-                        } else {
-                            anterior.setSiguiente(actual.getSiguiente());
-                        }
-
-                        numElementos--;
-                    } else {
-                        Nodo nuevoNodo = new Nodo(valorActual, siguiente);
-                        actual.setSiguiente(nuevoNodo);
-
-                        numElementos++;
-                    }
-
-                    primeraAparicion = false;
-                }
-
-                anterior = actual;
-                actual = siguiente;
-            }
         }
     }
 
